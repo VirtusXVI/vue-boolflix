@@ -1,18 +1,20 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <MyInput/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+// d197ccf6d7b8c9f670d6f5e3440c730c
+// https://api.themoviedb.org/3/movie/550?api_key=d197ccf6d7b8c9f670d6f5e3440c730c
+// https://api.themoviedb.org/3/search/movie?api_key=d197ccf6d7b8c9f670d6f5e3440c730c&language=en-US&query=star&page=1&include_adult=false
+import MyInput from "./components/MyInput.vue"
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
+    MyInput
+  },
+  
 }
 </script>
 
