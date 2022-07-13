@@ -6,7 +6,7 @@
         <div v-for="film,index in searchedFilms" :key="index" class="card">
             <span>{{ film.title }}</span>
             <span>{{ film.original_title }}</span>
-            <country-flag :country="!film.original_language ? `` : `${film.original_language}`" size='normal' rounded="true"/>
+            <country-flag v-if="film.original_language" :country="!film.original_language ? `` : `${film.original_language}`" size='normal' rounded="true"/>
             <span>{{ film.vote_average }}</span>
         </div>
     </div>
