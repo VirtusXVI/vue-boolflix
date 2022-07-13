@@ -5,6 +5,7 @@
     <h2 :class="searchedFilms ? '' : 'titles'">Films</h2>
     <div v-if='searchedFilms' class="films-container">
         <div v-for="film,index in searchedFilms" :key="index" class="card">
+            <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
             <span>{{ film.title }}</span>
             <span>{{ film.original_title }}</span>
             <country-flag v-if="film.original_language" :country="!film.original_language ? `` : `${film.original_language}`" size='normal'/>
@@ -34,6 +35,7 @@
                 filmName: "",
                 searchedFilms: null,
                 searchedSeries: null,
+                coverUrl: null
             }
         },
         components:{
@@ -107,5 +109,8 @@
     }
     .titles{
         display: none;
+    }
+    img{
+        width: 100%;
     }
 </style>
