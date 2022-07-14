@@ -3,6 +3,12 @@
     <div class="header-background">
         <div class="header-container">
             <img class="logo" src="../assets/img/logo.svg" alt="">
+            <div class="input">
+                <div>
+                    <input v-model="filmName" type="text" name="filmname" id="filmname">
+                    <button @click="$emit('search', filmName)">conferma</button>
+                </div>
+            </div>
         </div>
     </div>
   </div>
@@ -10,9 +16,9 @@
 
 <script>
     export default {
-        data(){
-            return {
-                searchStart: false
+        data() {
+            return{
+                filmName: "",
             }
         }
     }
@@ -27,6 +33,9 @@
         width: 70%;
         margin: 0 auto;
         height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
     // LOGO
     .logo{
