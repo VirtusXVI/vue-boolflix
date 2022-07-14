@@ -5,20 +5,31 @@
     <h2 :class="searchedFilms ? '' : 'titles'">Films</h2>
     <div v-if='searchedFilms' class="films-container">
         <div v-for="film,index in searchedFilms" :key="index" class="card">
-            <img src="https://image.tmdb.org/t/p/w342/wwemzKWzjKYJFfCeiB57q3r4Bcm.png" alt="">
-            <span>{{ film.title }}</span>
-            <span>{{ film.original_title }}</span>
-            <country-flag v-if="film.original_language" :country="!film.original_language ? `` : `${film.original_language}`" size='normal'/>
-            <span>{{ film.vote_average }}</span>
+            <div>
+                <img v-if="film.poster_path" :src="`https://image.tmdb.org/t/p/w342${film.poster_path}`" alt="">
+                <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb1vm2W-b2WQOKVn-OHECsVw0jGt9zY1SLeg&usqp=CAU" alt="">
+            </div>
+            <div>
+                <span>{{ film.title }}</span>
+                <span>{{ film.original_title }}</span>
+                <div><i  v-for="n in getVote(film.vote_average)" :key="n"  class="fa-solid fa-star"></i><i v-for="n in 5 - getVote(film.vote_average)" :key="n" class="fa-regular fa-star"></i></div>
+                <country-flag v-if="film.original_language" :country="!film.original_language ? `` : `${film.original_language}`" size='normal'/>
+            </div>
         </div>
     </div>
     <h2 :class="searchedSeries ? '' : 'titles'">Series</h2>
     <div v-if='searchedFilms' class="films-container">
         <div v-for="series,index in searchedSeries" :key="index" class="card">
-            <span>{{ series.name }}</span>
-            <span>{{ series.name }}</span>
-            <country-flag v-if="series.original_language" :country="!series.original_language ? `` : `${series.original_language}`" size='normal'/>
-            <span>{{ series.vote_average }}</span>
+            <div class="image">
+                <img v-if="series.poster_path" :src="`https://image.tmdb.org/t/p/w342${series.poster_path}`" alt="">
+                <img v-else src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb1vm2W-b2WQOKVn-OHECsVw0jGt9zY1SLeg&usqp=CAU" alt="">
+            </div>
+            <div>
+                <span>{{ series.name }}</span>
+                <span>{{ series.name }}</span>
+                <span>{{ series.vote_average }}</span>
+                <country-flag v-if="series.original_language" :country="!series.original_language ? `` : `${series.original_language}`" size='normal'/>
+            </div>
         </div>
     </div>
   </div>
@@ -35,7 +46,6 @@
                 filmName: "",
                 searchedFilms: null,
                 searchedSeries: null,
-                coverUrl: null
             }
         },
         components:{
@@ -83,6 +93,12 @@
                         }
                     }
                 })
+            },
+            getVote(vote){
+                let scaledVote = vote / 2;
+                scaledVote = Math.round(scaledVote);
+                console.log(scaledVote);
+                return scaledVote;
             }
         },
     }
@@ -97,20 +113,28 @@
         margin: 0 auto;
     }
     .card{
-        height: calc(100% / 4);
-        width: calc(90% / 5);
+        min-height: calc(100% / 4);
+        min-width: calc(90% / 5);
+        max-height: calc(100% / 4);
+        max-width: calc(90% / 5);
         margin-top: 1rem;
         border: 1px solid grey;
         border-radius: 10px;
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
     .card span{
         display: block;
+    }
+    .card div div{
+        height: 20px;
     }
     .titles{
         display: none;
     }
     img{
-        width: 100%;
+        width: 50%;
     }
 </style>
